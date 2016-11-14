@@ -1,0 +1,8 @@
+#!/bin/sh
+
+true > strings.c
+for name in vertex fragment; do
+	echo "const char ${name}_source[] =" >> strings.c
+	sed -e 's/\(["\\]\)/\\\1/g;s/^/"/;s/$/\\n"/;$s/$/;/' "$name.glsl" \
+		>> strings.c
+done
